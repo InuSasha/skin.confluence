@@ -424,6 +424,12 @@
 			<thumb/>
 			<visible>!String.IsEmpty(Skin.String(HomeVideosButton5))</visible>
 		</item>
+		<item>
+			<label>24001</label>
+			<onclick>ActivateWindow(Videos,Addons,return)</onclick>
+			<icon>DefaultAddonVideo.png</icon>
+			<thumb>-</thumb>
+		</item>
 	</include>
 	<include name="HomeAddonItemsMusic">
 		<item>
