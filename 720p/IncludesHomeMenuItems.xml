@@ -87,6 +87,11 @@
 			<onclick>ActivateWindow(Videos,$INFO[Container(90160).ListItemNoWrap(5).FileNameAndPath],return)</onclick>
 			<visible>!String.IsEmpty(Container(90160).ListItemNoWrap(5).Label)</visible>
 		</control>
+		<control type="button" id="90169">
+			<include>ButtonHomeSubCommonValues</include>
+			<label>24001</label>
+			<onclick>ActivateWindow(Videos,Addons,return)</onclick>
+		</control>
 		<control type="image" id="90168">
 			<width>35</width>
 			<height>35</height>
