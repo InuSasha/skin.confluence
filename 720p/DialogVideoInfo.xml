@@ -270,6 +270,11 @@
 								<label2>$INFO[ListItem.FilenameAndPath]</label2>
 								<visible>!String.IsEmpty(ListItem.FilenameAndPath)</visible>
 							</item>
+							<item>
+								<label>$LOCALIZE[20459]:</label>
+								<label2>$INFO[ListItem.Tag]</label2>
+								<visible>!String.IsEmpty(ListItem.Tag)</visible>
+							</item>
 						</content>
 					</control>
 					<control type="image">
@@ -412,6 +417,11 @@
 								<label>$LOCALIZE[15311]</label>
 								<label2>$INFO[ListItem.FilenameAndPath]</label2>
 								<visible>!String.IsEmpty(ListItem.FilenameAndPath)</visible>
+							</item>
+							<item>
+								<label>$LOCALIZE[20459]:</label>
+								<label2>$INFO[ListItem.Tag]</label2>
+								<visible>!String.IsEmpty(ListItem.Tag)</visible>
 							</item>
 						</content>
 					</control>
@@ -731,6 +741,11 @@
 								<label>$LOCALIZE[15311]</label>
 								<label2>$INFO[ListItem.FilenameAndPath]</label2>
 								<visible>!String.IsEmpty(ListItem.FilenameAndPath)</visible>
+							</item>
+							<item>
+								<label>$LOCALIZE[20459]:</label>
+								<label2>$INFO[ListItem.Tag]</label2>
+								<visible>!String.IsEmpty(ListItem.Tag)</visible>
 							</item>
 						</content>
 					</control>
