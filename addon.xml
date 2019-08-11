@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.ConfluenceInuSasha" version="4.6.5" name="ConfluenceInuSasha" provider-name="InuSasha">
+<addon id="skin.ConfluenceInuSasha" version="4.6.5.1" name="ConfluenceInuSasha" provider-name="InuSasha">
 	<requires>
 		<import addon="xbmc.gui" version="5.14.0"/>
 	</requires>
