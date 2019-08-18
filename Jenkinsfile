@@ -13,7 +13,7 @@ pipeline {
         major = "9"
         name = "skin.ConfluenceInuSasha-${version}"
         zipfile = "${name}.zip"
-        upload_path = "public_html/dl.inusasha.de/libreelec/addons"
+        upload_path = "public_html/dl.inusasha.de/kodi/addons"
     }
     
     stages {
@@ -55,7 +55,7 @@ pipeline {
                         from: major,
                         into: upload_path
                 }
-                httpRequest "https://dl.inusasha.de/libreelec/addons/addons_xml_generator.php"
+                httpRequest "https://dl.inusasha.de/kodi/addons/addons_xml_generator.php"
             }
         }
     }
