@@ -10,10 +10,10 @@ pipeline {
     agent any
     environment {
         version = "${BRANCH_NAME}"
-        major = "9"
+        major = "9.0"
         name = "skin.ConfluenceInuSasha-${version}"
         zipfile = "${name}.zip"
-        upload_path = "public_html/dl.inusasha.de/kodi/addons"
+        upload_path = "public_html/dl.inusasha.de/kodi/addons/${major}/RPi2/arm"
     }
     
     stages {
@@ -31,7 +31,6 @@ pipeline {
                 sh """#!/bin/bash -ex
                     cd skin.ConfluenceInuSasha
                     sed "s|%version%|${version}|" -i addon.xml
-                    sed "s|%major%|${major}|" -i addon.xml
                 """
                 zip zipFile: zipfile,
                     glob: '**/*.*'
@@ -45,14 +44,14 @@ pipeline {
             }
             steps {
                 sh """#!/bin/bash -ex
-                    mkdir -p "${major}/skin.ConfluenceInuSasha"
-                    cp ${zipfile} ${major}/skin.ConfluenceInuSasha
-                    cp -r skin.ConfluenceInuSasha/{addon.xml,resources,changelog.txt} ${major}/skin.ConfluenceInuSasha
+                    mkdir -p "upload/skin.ConfluenceInuSasha"
+                    cp ${zipfile} upload/skin.ConfluenceInuSasha
+                    cp -r skin.ConfluenceInuSasha/{addon.xml,resources,changelog.txt} upload/skin.ConfluenceInuSasha
                 """
                 withCredentials([sshUserPrivateKey(credentialsId: '	inu-at-dl.inusasha.de', keyFileVariable: 'identityFile', passphraseVariable: '', usernameVariable: 'userName')]) {
                     sshPut \
                         remote: [ 'name': 'inusasha.de', 'host': 'inusasha.de', 'user': username, 'allowAnyHosts': true, 'identityFile': identityFile ],
-                        from: major,
+                        from: "upload/skin.ConfluenceInuSasha",
                         into: upload_path
                 }
                 httpRequest "https://dl.inusasha.de/kodi/addons/addons_xml_generator.php"
