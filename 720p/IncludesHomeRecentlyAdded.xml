@@ -139,7 +139,7 @@
 							<visible>Control.HasFocus(8000)</visible>
 						</control>
 					</focusedlayout>
-					<content limit="10">videodb://homemovies/</content>
+					<content limit="10">plugin://plugin.video.inusasha-home-playlists/movies</content>
 				</control>
 				<control type="button">
 					<description>left Arrow</description>
@@ -217,7 +217,7 @@
 							<width>220</width>
 							<height>155</height>
 							<aspectratio>keep</aspectratio>
-							<texture background="true">$INFO[ListItem.Art(tvshow.poster)]</texture>
+							<texture background="true">$INFO[ListItem.Icon]</texture>
 							<bordertexture border="5">button-nofocus.png</bordertexture>
 							<bordersize>5</bordersize>
 						</control>
@@ -232,7 +232,7 @@
 							<selectedcolor>selected</selectedcolor>
 							<align>center</align>
 							<aligny>center</aligny>
-							<label>$INFO[ListItem.TVShowTitle] - $INFO[ListItem.Season]x$INFO[ListItem.Episode]</label>
+							<label>$INFO[ListItem.Label2]</label>
 						</control>
 						<control type="label">
 							<left>20</left>
@@ -263,7 +263,7 @@
 							<width>220</width>
 							<height>155</height>
 							<aspectratio>keep</aspectratio>
-							<texture background="true">$INFO[ListItem.Art(tvshow.poster)]</texture>
+							<texture background="true">$INFO[ListItem.Icon]</texture>
 							<bordertexture border="5">folder-focus.png</bordertexture>
 							<bordersize>5</bordersize>
 							<visible>Control.HasFocus(8001)</visible>
@@ -274,7 +274,7 @@
 							<width>220</width>
 							<height>155</height>
 							<aspectratio>keep</aspectratio>
-							<texture>$INFO[ListItem.Art(tvshow.poster)]</texture>
+							<texture>$INFO[ListItem.Icon]</texture>
 							<bordertexture border="5">button-nofocus.png</bordertexture>
 							<bordersize>5</bordersize>
 							<visible>!Control.HasFocus(8001)</visible>
@@ -290,7 +290,7 @@
 							<selectedcolor>selected</selectedcolor>
 							<align>center</align>
 							<aligny>center</aligny>
-							<label>$INFO[ListItem.TVShowTitle] - $INFO[ListItem.Season]x$INFO[ListItem.Episode]</label>
+							<label>$INFO[ListItem.Label2]</label>
 						</control>
 						<control type="label">
 							<left>20</left>
@@ -320,7 +320,7 @@
 							<visible>Control.HasFocus(8001)</visible>
 						</control>
 					</focusedlayout>
-					<content limit="10">videodb://hometvshows/</content>
+					<content limit="10">plugin://plugin.video.inusasha-home-playlists/tvshows/</content>
 				</control>
 				<control type="button">
 					<description>left Arrow</description>
