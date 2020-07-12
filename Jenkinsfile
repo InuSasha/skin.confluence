@@ -25,7 +25,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('build') {
             steps {
                 sh """#!/bin/bash -ex
@@ -34,30 +34,52 @@ pipeline {
                 """
                 zip zipFile: zipfile,
                     glob: '**/*.*'
-            }
-        }
-        
-        stage('upload') {
-            when { buildingTag() }
-            options {
-                lock resource: "Kodi-InuSasha-Repo"
-            }
-            steps {
+
                 sh """#!/bin/bash -ex
                     mkdir -p "upload/skin.ConfluenceInuSasha"
                     cp ${zipfile} upload/skin.ConfluenceInuSasha
                     cp -r skin.ConfluenceInuSasha/{addon.xml,resources,changelog.txt} upload/skin.ConfluenceInuSasha
                 """
-                withCredentials([sshUserPrivateKey(credentialsId: '	inu-at-dl.inusasha.de', keyFileVariable: 'identityFile', passphraseVariable: '', usernameVariable: 'userName')]) {
-                    sshPut \
-                        remote: [ 'name': 'inusasha.de', 'host': 'inusasha.de', 'user': username, 'allowAnyHosts': true, 'identityFile': identityFile ],
-                        from: "upload/skin.ConfluenceInuSasha",
-                        into: "${upload_path}/RPi2/arm"
-                    sshPut \
-                        remote: [ 'name': 'inusasha.de', 'host': 'inusasha.de', 'user': username, 'allowAnyHosts': true, 'identityFile': identityFile ],
-                        from: "upload/skin.ConfluenceInuSasha",
-                        into: "${upload_path}/Generic/x86_64"
+            }
+        }
+
+        stage('upload') {
+            when { buildingTag() }
+            options {
+                lock resource: "Kodi-InuSasha-Repo"
+            }
+            matrix {
+                axes {
+                    axis {
+                        name 'board'
+                        values 'Generic', 'RPi2', 'RPi4'
+                    }
                 }
+                environment {
+                    arch="${env.board == 'Generic' ? 'x86_64' : 'arm'}"
+                }
+                
+                stages {
+                    stage('Upload') {
+                        steps {
+                            withCredentials([sshUserPrivateKey(credentialsId: '	inu-at-dl.inusasha.de', keyFileVariable: 'identityFile', passphraseVariable: '', usernameVariable: 'userName')]) {
+                                sshPut \
+                                    remote: [ 'name': 'inusasha.de', 'host': 'inusasha.de', 'user': username, 'allowAnyHosts': true, 'identityFile': identityFile ],
+                                    from: "upload/skin.ConfluenceInuSasha",
+                                    into: "${upload_path}/${board}/${arch}"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Regen Addons.xml') {
+            when { buildingTag() }
+            options {
+                lock resource: "Kodi-InuSasha-Repo"
+            }
+            steps {
                 httpRequest "https://dl.inusasha.de/kodi/addons/addons_xml_generator.php"
             }
         }
