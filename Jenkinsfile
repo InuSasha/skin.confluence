@@ -10,7 +10,7 @@ pipeline {
     agent any
     environment {
         version = "${BRANCH_NAME}"
-        major = "${BRANCH_NAME == 'master' ? 'master' : BRANCH_NAME.tokenize('0')[0]}"
+        major = "${BRANCH_NAME == 'master' ? 'master' : BRANCH_NAME.tokenize('+')[0]}"
         name = "skin.ConfluenceInuSasha-${version}"
         zipfile = "${name}.zip"
         upload_path = "public_html/dl.inusasha.de/kodi/addons/${major}"
