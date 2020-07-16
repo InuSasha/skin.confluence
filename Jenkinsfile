@@ -7,7 +7,7 @@ pipeline {
         skipDefaultCheckout()
     }
 
-    agent any
+    agent { label "le-build" }
     environment {
         version = "${BRANCH_NAME}"
         major = "${BRANCH_NAME == 'master' ? 'master' : BRANCH_NAME.tokenize('+')[0]}"
